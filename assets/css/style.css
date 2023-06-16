@@ -1,5 +1,10 @@
 body {
     background-color: #C6C6C6;
+    font-family: 'Manrope', sans-serif;
+}
+
+h6 {
+    margin: 0 !important;
 }
 
 .img-fluid {
@@ -26,84 +31,119 @@ body {
     font-size: 50px;
     text-align: center;
     font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+
 }
 #exampleInputEmail1 {
     z-index: 1;
     width: 50vw;
     position: absolute;
-right: 0;
-top: 0%;
-padding: 15px;
-/* transform: translateY(50%); */
+    right: 0;
+    top: 0%;
+    padding: 15px;
 }
 .form {
-position: relative;
+    position: relative;
 }
 
 #btn-search {
     z-index: 1;
-
-position: absolute;
-right: 10px;
-top: 10px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 .form-container {
     position: absolute;
     top: 43%;
     left: 77%;
-    /* transform: translate(-30%, -30%); */
-  }
+}
 
-  button {
-    /* border-radius: 5%; */
-  }
 
-  .dropdown-toggle {
+.dropdown-toggle {
     background-color: white;
     margin-right: 55px;
     border-radius: 10px !important;
-  }
+}
 
-  .text-filter {
+.text-filter {
     display: flex;
     justify-content: end;
     align-items: end;
     font-weight: bold;
-  }
+}
 
-  .card-img-top {
+.card-img-top {
     width: 100%;
     height: 25vh;
     object-fit: cover;
-    /* object-position: top; */
     border-top-right-radius: 21px;
     border-top-left-radius: 21px;
 
-  }
+}
 
-  .img-card {
+.img-card {
     position: relative;
-    
-  }
+}
 
-  .badge {
+.badge {
     position: absolute;
     top: 10px;
     right: 10px;
-  }
+}
 
-  .card {
+.card {
     border-radius: 21px;
     border: none;
-    width: 25vw;
-    /* height: 50vh; */
-  }
+    padding: 0;
+}
 
-  .recipes-container {
+.card-body {
+    font-family: 'Manrope', sans-serif;
+}
+
+.recipes-container {
     display: grid;
-grid-template-columns: repeat(3, 1fr);
-grid-template-rows: repeat(12, 1fr);
-grid-column-gap: 10px;
-grid-row-gap: 10px;
-  }
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+}
+
+.ingredients-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+}
+
+.ingredient-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.ingredients-list p {
+    display: flex;
+}
+
+.name-recipe {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+}
+
+.p {
+    margin-top: 31px;
+    text-transform: uppercase;
+    color: #7A7A7A;
+}
+
+.p-ingredient-name {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.p-ingredient-quantity {
+    color: #7A7A7A;
+    font-size: 15px;
+    margin-top: 0px;
+}
