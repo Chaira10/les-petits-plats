@@ -34,7 +34,7 @@ h6 {
     font-family: 'Manrope', sans-serif;
 
 }
-#exampleInputEmail1 {
+#search-bar {
     z-index: 1;
     width: 50vw;
     position: absolute;
@@ -96,6 +96,7 @@ h6 {
     border-radius: 21px;
     border: none;
     padding: 0;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .card-body {
@@ -146,4 +147,31 @@ h6 {
     color: #7A7A7A;
     font-size: 15px;
     margin-top: 0px;
+}
+
+.dropdown-menu {
+    border-radius: 25px;
+    padding: 15px;
+    width: 250px;
+}
+
+.li-drop {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.li-drop:hover {
+    background-color: #FFD15B;
+
+}
+
+#selectedItemsContainer {
+    display: flex;
+    /* height: 300px; */
+}
+
+.tag-filter {
+    background-color: #FFD15B;
+    padding: 15px;
+    border-radius: 5px;
+    
 }

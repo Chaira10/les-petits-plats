@@ -23,8 +23,8 @@
             <form>
                 <div class="mb-3">
                     <div class=" form">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <button type="button" class="btn btn-dark" id="btn-search"><i class="far fa-search"></i></button>
+                        <input type="search" class="form-control" id="search-bar" aria-describedby="emailHelp">
+                        <button type="submit" class="btn btn-dark" id="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </div>
             </form>
@@ -38,36 +38,45 @@
                                 <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 Ingredients
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" id="ingredientsDropdown">
                                     <li>
-                                        <input type="text" class="form-control" placeholder="Recherche">
+                                        <form>
+                                            <input type="search" class="form-control" placeholder="Recherche" id="ingredient">
+                                            <button type="submit" class="btn btn-light" id="btn-search"><i class="far fa-search"></i></button>
+                                        </form>
+                                        
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                    
                                 </ul>
                             </div>
                             <div class="btn-group" role="group">
                                 <button id="btnGroupDrop2" type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 Appareils
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop2" id="appareilsDropdown">
                                     <li>
-                                        <input type="text" class="form-control" placeholder="Recherche">
+                                        <form>
+                                            <input type="search" class="form-control" placeholder="Recherche" id="appareils">
+                                            <button type="submit" class="btn btn-light" id="btn-search"><i class="far fa-search"></i></button>
+                                        </form>
+                                        
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                    
                                 </ul>
                             </div>
                             <div class="btn-group" role="group">
                                 <button id="btnGroupDrop3" type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 Ustensiles
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop3">
+                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop3" id="ustensilsDropdown">
                                     <li>
-                                        <input type="text" class="form-control" placeholder="Recherche">
+                                        <form>
+                                            <input type="search" class="form-control mb-3" placeholder="Recherche" id="ustensiles">
+                                            <button type="submit" class="btn btn-light" id="btn-search"><i class="far fa-search"></i></button>
+                                        </form>
+                                        
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                                    <li><a class="dropdown-item" href="#">Dropdown link</a></li>    
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -76,6 +85,8 @@
             <h2 class="text-filter">1500 recettes</h2>
         </div>
         </div>
+        <div id="selectedItemsContainer"></div>
+
     </div>
     <div class="container mb-5 mt-5">
         <div class="recipes-container row mb-5 mt-5 " id="recipeContainer"></div>
