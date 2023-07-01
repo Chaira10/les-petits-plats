@@ -175,3 +175,14 @@ h6 {
     border-radius: 5px;
     
 }
+
+
+.badg-primary {
+    background-color: #FFD15B;
+    padding: 15px;
+    border-radius: 5px;
+  }
+
+  .btn-close-white {
+    --bs-icon-color: #fff;
+  }
