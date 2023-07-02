@@ -283,5 +283,36 @@ ustensilsList.forEach((item) => {
 
 
 
+// Fonction de recherche générique
+function searchList(inputId, listId) {
+  let input = document.getElementById(inputId);
+  let filter = input.value.toUpperCase();
+  let ul = document.getElementById(listId);
+  let li = ul.getElementsByTagName("li");
+
+  Array.from(li).forEach((item) => {
+    let txtValue = item.textContent || item.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      item.style.display = "";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
+
+
+// Gestion de la recherche pour chaque liste
+document.getElementById("ingredient").addEventListener("input", function() {
+  searchList("ingredient", "ingredientsDropdown");
+});
+
+document.getElementById("appareils").addEventListener("input", function() {
+  searchList("appareils", "appareilsDropdown");
+});
+
+document.getElementById("ustensiles").addEventListener("input", function() {
+  searchList("ustensiles", "ustensilsDropdown");
+});
+
 
 

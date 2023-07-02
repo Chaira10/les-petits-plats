@@ -1,188 +1,196 @@
 body {
-    background-color: #C6C6C6;
-    font-family: 'Manrope', sans-serif;
+  background-color: #c6c6c6;
+  font-family: "Manrope", sans-serif;
 }
 
 h6 {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .img-fluid {
-    width: 100%;
-    height: 70vh;
-    position: relative;
+  width: 100%;
+  height: 70vh;
+  position: relative;
 }
 
 .img-fluid-logo {
-    z-index: 1;
-    position: absolute;
-    top: 41px;
-    left: 51px;
-    width: 150px;
+  z-index: 1;
+  position: absolute;
+  top: 41px;
+  left: 51px;
+  width: 150px;
 }
 
 .text-banner {
-    z-index: 1;
-    position: absolute;
-    top: 30%;
-    left: 25%;
-    color: #FFD15B;
-    text-transform: uppercase;
-    font-size: 50px;
-    text-align: center;
-    font-weight: 700;
-    font-family: 'Manrope', sans-serif;
-
+  z-index: 1;
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  color: #ffd15b;
+  text-transform: uppercase;
+  font-size: 50px;
+  text-align: center;
+  font-weight: 700;
+  font-family: "Manrope", sans-serif;
 }
 #search-bar {
-    z-index: 1;
-    width: 50vw;
-    position: absolute;
-    right: 0;
-    top: 0%;
-    padding: 15px;
+  z-index: 1;
+  width: 50vw;
+  position: absolute;
+  right: 0;
+  top: 0%;
+  padding: 15px;
 }
 .form {
-    position: relative;
+  position: relative;
 }
 
 #btn-search {
-    z-index: 1;
-    position: absolute;
-    right: 10px;
-    top: 10px;
+  z-index: 1;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 
 .form-container {
-    position: absolute;
-    top: 43%;
-    left: 77%;
+  position: absolute;
+  top: 43%;
+  left: 77%;
 }
 
-
 .dropdown-toggle {
-    background-color: white;
-    margin-right: 55px;
-    border-radius: 10px !important;
+  background-color: white;
+  margin-right: 55px;
+  border-radius: 10px !important;
 }
 
 .text-filter {
-    display: flex;
-    justify-content: end;
-    align-items: end;
-    font-weight: bold;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  font-weight: bold;
 }
 
 .card-img-top {
-    width: 100%;
-    height: 25vh;
-    object-fit: cover;
-    border-top-right-radius: 21px;
-    border-top-left-radius: 21px;
-
+  width: 100%;
+  height: 25vh;
+  object-fit: cover;
+  border-top-right-radius: 21px;
+  border-top-left-radius: 21px;
 }
 
 .img-card {
-    position: relative;
+  position: relative;
 }
 
 .badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .card {
-    border-radius: 21px;
-    border: none;
-    padding: 0;
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 21px;
+  border: none;
+  padding: 0;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-body {
-    font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 
 .recipes-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(12, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
 }
 
 .ingredients-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 10px;
 }
 
 .ingredient-item {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .ingredients-list p {
-    display: flex;
+  display: flex;
 }
 
 .name-recipe {
-    font-family: 'Anton', sans-serif;
-    font-size: 20px;
+  font-family: "Anton", sans-serif;
+  font-size: 20px;
 }
 
 .p {
-    margin-top: 31px;
-    text-transform: uppercase;
-    color: #7A7A7A;
+  margin-top: 31px;
+  text-transform: uppercase;
+  color: #7a7a7a;
 }
 
 .p-ingredient-name {
-    margin-bottom: 0;
-    font-weight: bold;
-    font-size: 15px;
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .p-ingredient-quantity {
-    color: #7A7A7A;
-    font-size: 15px;
-    margin-top: 0px;
+  color: #7a7a7a;
+  font-size: 15px;
+  margin-top: 0px;
 }
 
 .dropdown-menu {
-    border-radius: 25px;
-    padding: 15px;
-    width: 250px;
+  border-radius: 25px;
+  padding: 15px;
+  width: 250px;
 }
 
 .li-drop {
-    padding-top: 10px;
-    padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .li-drop:hover {
-    background-color: #FFD15B;
-
+  background-color: #ffd15b;
 }
 
 #selectedItemsContainer {
-    display: flex;
-    /* height: 300px; */
+  display: flex;
+  /* height: 300px; */
 }
 
 .tag-filter {
-    background-color: #FFD15B;
-    padding: 15px;
-    border-radius: 5px;
-    
+  background-color: #ffd15b;
+  padding: 15px;
+  border-radius: 5px;
 }
 
-
 .badg-primary {
-    background-color: #FFD15B;
-    padding: 15px;
-    border-radius: 5px;
-  }
+  background-color: #ffd15b;
+  padding: 15px;
+  border-radius: 5px;
+}
 
-  .btn-close-white {
-    --bs-icon-color: #fff;
-  }
+.btn-close-white {
+  --bs-icon-color: #fff;
+}
+
+.search-icon {
+  cursor: pointer;
+  position: relative;
+  right: 10px;
+  margin-left: -30px;
+  z-index: 1;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+}
+.search-icon i {
+  color: #888;
+}
