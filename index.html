@@ -13,21 +13,22 @@
     <title>Les petits plats</title>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid p-0">
         <div class="banner">
             <img src="./assets/banner.png" alt="" class="img-fluid">
             <img src="./assets/logo.png" alt="" class="img-fluid-logo">
 
             <h2 class="text-banner">Cherchez parmi plus de 1500 recettes<br> du quotidien, simples et délicieuses</h2>
             <div class="form-container">
-            <form>
-                <div class="mb-3">
-                    <div class=" form">
-                        <input type="search" class="form-control" id="search-bar" aria-describedby="emailHelp">
-                        <button type="submit" class="btn btn-dark" id="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
+            <form class=" form mb-3">
+                        <div class="input-container input-group">
+                            <input type="search" class="form-control" id="search-bar" aria-describedby="search-bar">
+                            <div class="input-group-append">
+                                <span class="input-group-text search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            </div>
                 </div>
             </form>
+            <ul id="autocompleteDropdown"></ul>
             </div>
         </div>
         <div class="container mt-4 ">
@@ -49,8 +50,6 @@
                                             </div>
                                         </div>
                                     </form>
-                                    
-                                    
                                 </ul>
                             </div>
                             <div class="btn-group" role="group">
