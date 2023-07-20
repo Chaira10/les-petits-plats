@@ -70,6 +70,10 @@ h6 {
 
 }
 
+.selected {
+  display: none !important;
+}
+
 /* #btn-search {
   z-index: 1;
   margin-left: 10px;

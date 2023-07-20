@@ -20,7 +20,6 @@ function getRecipe() {
     const recipeContainer = document.getElementById('recipeContainer'); // Élément HTML qui contiendra les cartes de recettes
     recipeContainer.innerHTML = ''; 
     // Efface le contenu précédent du conteneur de recettes
-    // updateDropdownOptions(recipesData);
     // Pour chaque recette, elle crée une carte de recette à l'aide de la fonction recipeFactory() et ajoute cette carte au conteneur recipeContainer.
     recipesData.forEach((recipe) => {
       const recipeModel = recipeFactory(recipe);
@@ -183,6 +182,11 @@ function generateIngredientsOptions() {
     ingredientsDropdown.innerHTML = `
       ${ingredientsOptions.map(e => `<li class="dropdown-item">${e}</li>`).join('')}
     `; // Efface le contenu précédent du dropdown
+
+    const dropdowns = document.querySelectorAll('.dropdown-item');
+    dropdowns.forEach((item) => {
+      item.addEventListener('click', handleSelection);
+    });
   
     // ingredientsOptions.forEach((ingredient) => {
     //   const li = document.createElement('li');
@@ -203,10 +207,11 @@ function generateIngredientsOptions() {
         ingredientsSet.add(ingredientName);
       });
     });
-  
+    console.log("Ingredients Set:", ingredientsSet);
     const ingredientsList = ingredientsDropdown.querySelectorAll('li');
     ingredientsList.forEach((item) => {
       const ingredient = item.textContent.toLowerCase();
+      console.log("Current Ingredient:", ingredient);
       if (ingredientsSet.has(ingredient)) {
         item.style.display = "";
       } else {
@@ -215,32 +220,58 @@ function generateIngredientsOptions() {
     });
   }
   
+
+  // Fonction pour masquer tous les éléments ayant la classe "selected" dans le dropdown
+function hideSelectedItems() {
+  const dropdowns = document.querySelectorAll('.dropdown-item');
+  dropdowns.forEach((item) => {
+    if (item.classList.contains('selected')) {
+      item.style.display = "none";
+    }
+  });
+}
+
   
   
 
   const selectedItemsContainer = document.getElementById('selectedItemsContainer');
 
-function createBadge(item) {
-  const trimmedItem = item.trim();
-  const badge = document.createElement('span');
-  badge.classList.add('badg-primary', 'me-2', 'tag', );
-  badge.textContent = trimmedItem;
-  badge.innerHTML = `${trimmedItem}<i class="fa-solid fa-xmark ms-3"></i>`;
-
-  // Vérifier si l'événement de clic a déjà été ajouté à l'icône de la croix
-  const closeIcon = badge.querySelector('.fa-xmark');
 
 
+
+  function createBadge(item) {
+    const trimmedItem = item.trim();
+    const badge = document.createElement('span');
+    badge.classList.add('badg-primary', 'me-2', 'tag', );
+    badge.textContent = trimmedItem;
+    badge.innerHTML = `${trimmedItem}<i class="fa-solid fa-xmark ms-3"></i>`;
+  
+    // Vérifier si l'événement de clic a déjà été ajouté à l'icône de la croix
+    const closeIcon = badge.querySelector('.fa-xmark');
+  
     // Ajouter un gestionnaire d'événements de clic à l'icône de la croix
     closeIcon.addEventListener('click', () => {
       removeSelectedItem(badge);
     });
   
-
-  selectedItemsContainer.appendChild(badge);
-  filterRecipes();
-}
-
+    // Ajouter la classe "selected" à l'élément de liste
+    const dropdowns = document.querySelectorAll('.dropdown-item');
+    dropdowns.forEach((item) => {
+      if (item.textContent.toLowerCase() === trimmedItem.toLowerCase()) {
+        item.classList.add('selected');
+  
+        // Supprimer l'écouteur d'événements de clic pour cet élément
+        item.removeEventListener('click', handleSelection);
+  
+        // Masquer l'élément en définissant sa propriété display à "none"
+        item.style.display = "none";
+      }
+    });
+  
+    selectedItemsContainer.appendChild(badge);
+    filterRecipes();
+  }
+  
 
 // Supprime un élément sélectionné (tag)
 function removeSelectedItem(badge) {
@@ -251,14 +282,24 @@ function removeSelectedItem(badge) {
 
 function handleSelection(event) {
   const selectedItem = event.target.textContent;
-  console.log(selectedItem);
-  createBadge(selectedItem);
-  // Supprimer l'élément de la liste déroulante
-  const li = event.target;
-  li.style.display = "none";
+
+  // Vérifier si l'élément de la liste déroulante a déjà la classe "selected"
+  if (!event.target.classList.contains('selected')) {
+    console.log(selectedItem);
+    createBadge(selectedItem);
+    // Supprimer l'écouteur d'événements de clic pour cet élément
+    event.target.removeEventListener('click', handleSelection);
+    // Supprimer l'élément de la liste déroulante
+    const li = event.target;
+    li.classList.add('selected'); // Ajouter la classe "selected" à l'élément
+    li.style.display = "none"; // Cacher l'élément en définissant sa propriété display à "none"
+  }
 
   filterRecipes();
 }
+
+
+
 
 // Ajouter des écouteurs d'événements aux éléments de tous les dropdowns
 const dropdowns = document.querySelectorAll('.dropdown-item');
@@ -302,10 +343,10 @@ searchInput.addEventListener('input', function() {
       // updateIngredientsDropdown(filteredRecipes);
       // removeSelectedItem(badge)
       // Ajouter des écouteurs d'événements aux éléments de tous les dropdowns
-  const dropdowns = document.querySelectorAll('.dropdown-item');
-  dropdowns.forEach((item) => {
-    item.addEventListener('click', handleSelection);
-  });
+      // const dropdowns = document.querySelectorAll('.dropdown-item');
+      // dropdowns.forEach((item) => {
+      //   item.addEventListener('click', handleSelection);
+      // });
   
     }
   });
