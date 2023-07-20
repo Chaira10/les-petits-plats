@@ -169,9 +169,13 @@ h6 {
     /* height: 300px; */
 }
 
-.tag-filter {
+.tag {
     background-color: #FFD15B;
     padding: 15px;
     border-radius: 5px;
     
+}
+
+.selected {
+  display: none !important;
 }

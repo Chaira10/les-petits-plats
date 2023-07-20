@@ -404,6 +404,7 @@ function createBadge(item) {
 
   selectedItemsContainer.appendChild(badge);
   filterRecipes();
+  hideSelectedItems();
 }
 
 
