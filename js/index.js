@@ -9,6 +9,9 @@ function getRecipe() {
   }
 }
 
+
+
+
 // Affiche les recettes filtrées
 function displayRecipe() {
   const recipesData = getRecipe(); // Récupère les données des recettes
@@ -81,8 +84,6 @@ function filterRecipes() {
 
         return ustensilName.includes(searchText);
       });
-
-      
 
       if (ustensilsMatch) {
         return true;
@@ -446,6 +447,8 @@ function autocompleteSearch() {
   }
 }
 
+
+// let filteredRecipes = filterRecipes();
 // Ajoutez cet événement à votre code existant
 searchInput.addEventListener('input', autocompleteSearch);
 
@@ -459,13 +462,13 @@ searchInput.addEventListener('input', function() {
     });*/
     let counter = 0;
     if (counter == 0) {
-      let span;
+      var span;
       span = document.getElementById("autoreloa");
       span.innerHTML = counter;
     }
     ingredientsDropdown.innerHTML = ''; // Effacer la liste existante
     generateIngredientsOptions(); // Générer la liste complète des ingrédients
-    updateIngredientsDropdown(filteredRecipes);
+    // updateIngredientsDropdown(filteredRecipes);
     removeSelectedItem(badge)
   }
     // Effectuer la mise à jour en fonction du texte de recherche actuel
