@@ -53,7 +53,8 @@ function filterByIngredients(recipesData, searchText) {
     });
   
     updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
-  
+    updateApplianceDropdown(filteredRecipes);
+    updateUstensilsDropdown(filteredRecipes)
     return filteredRecipes; // Renvoyer les recettes filtrées
   }
   
@@ -65,7 +66,8 @@ function filterByDescription(recipesData, searchText) {
   });
 
   updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
-
+  updateApplianceDropdown(filteredRecipes);
+  updateUstensilsDropdown(filteredRecipes)
   return filteredRecipes; // Renvoyer les recettes filtrées
 }
 
@@ -77,7 +79,8 @@ function filterByAppliance(recipesData, searchText) {
     });
   
     updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
-  
+    updateApplianceDropdown(filteredRecipes);
+    updateUstensilsDropdown(filteredRecipes)
     return filteredRecipes; // Renvoyer les recettes filtrées
   }
   
@@ -91,7 +94,8 @@ function filterByUstensils(recipesData, searchText) {
     });
   
     updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
-  
+    updateApplianceDropdown(filteredRecipes);
+    updateUstensilsDropdown(filteredRecipes)
     return filteredRecipes; // Renvoyer les recettes filtrées
   }
 
@@ -114,7 +118,8 @@ function filterByUstensils(recipesData, searchText) {
   
     // Mettre à jour les ingrédients dans le menu déroulant en fonction des recettes filtrées par badge
     updateIngredientsDropdown(filteredRecipes);
-  
+    updateApplianceDropdown(filteredRecipes);
+    updateUstensilsDropdown(filteredRecipes)
     return filteredRecipes;
   }
   
@@ -140,6 +145,8 @@ function filterByUstensils(recipesData, searchText) {
   
     displayFilteredRecipes(filteredRecipes);
     updateIngredientsDropdown(filteredRecipes);
+    updateApplianceDropdown(filteredRecipes);
+    updateUstensilsDropdown(filteredRecipes)
   }
   
   
@@ -161,6 +168,7 @@ function displayFilteredRecipes(filteredRecipes) {
     recipeContainer.appendChild(recipeCardDom);
   });
 }
+
 
 const ingredientsDropdown = document.getElementById('ingredientList');
 
@@ -219,6 +227,112 @@ function generateIngredientsOptions() {
       }
     });
   }
+
+  const appareilsDropdown = document.getElementById('appareilList');
+
+  function generateApplianceOptions() {
+    const recipesData = getRecipe();
+  
+    const appliancesSet = new Set();
+  
+    recipesData.forEach((recipe) => {
+      
+        appliancesSet.add(recipe.appliance.toLowerCase());
+    });
+  
+    const appliancesOptions = Array.from(appliancesSet).sort();
+    const appareilsDropdown = document.getElementById('appareilList');
+    appareilsDropdown.innerHTML = `
+    ${appliancesOptions.map(e => `<li class="dropdown-item">${e}</li>`).join('')}`
+    // appliancesOptions.forEach((appliance) => {
+    //   const li = document.createElement('li');
+    //   li.classList.add('dropdown-item');
+    //   li.innerHTML = `${appliance}`;
+    //   appareilsDropdown.appendChild(li);
+    // });
+  }
+  
+  generateApplianceOptions();
+
+  function updateApplianceDropdown(filteredRecipes) {
+    const searchText = searchInput.value.toLowerCase();
+  
+    const applianceSet = new Set();
+  
+    filteredRecipes.forEach((recipe) => {
+      const recipeName = normalizeString(recipe.name.toLowerCase());
+      if (recipeName.includes(searchText)) {
+        const appliance = normalizeString(recipe.appliance.toLowerCase());
+        applianceSet.add(appliance);
+      }
+    });
+    
+    const applianceList = appareilsDropdown.querySelectorAll('li');
+  
+    applianceList.forEach((item) => {
+      const appliance = item.textContent.toLowerCase();
+      if (applianceSet.has(appliance)) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
+
+
+
+  const ustensilsDropdown = document.getElementById('ustensileList');
+
+  function generateUstensilsOptions() {
+    const recipesData = getRecipe();
+  
+    const ustensilsSet = new Set();
+  
+    recipesData.forEach((recipe) => {
+      recipe.ustensils.forEach((ustensil) => {
+        ustensilsSet.add(ustensil.toLowerCase());
+      });
+    });
+  
+    const ustensilsOptions = Array.from(ustensilsSet).sort();
+  
+    ustensilsOptions.forEach((ustensil) => {
+      const li = document.createElement('li');
+      li.classList.add('dropdown-item');
+      li.innerHTML = `${ustensil}`;
+      ustensilsDropdown.appendChild(li);
+    });
+  }
+  
+  generateUstensilsOptions();
+
+  function updateUstensilsDropdown(filteredRecipes) {
+    const searchText = searchInput.value.toLowerCase();
+  
+    const ustensilsSet = new Set();
+  
+    filteredRecipes.forEach((recipe) => {
+      const recipeName = normalizeString(recipe.name.toLowerCase());
+      if (recipeName.includes(searchText)) {
+        recipe.ustensils.forEach((ustensil) => {
+          const normalizedUstensil = normalizeString(ustensil.toLowerCase());
+          ustensilsSet.add(normalizedUstensil);
+        });
+      }
+    });
+  
+    const ustensilsList = ustensilsDropdown.querySelectorAll('li');
+  
+    ustensilsList.forEach((item) => {
+      const ustensil = item.textContent.toLowerCase();
+      if (ustensilsSet.has(ustensil)) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
+
   
 
   // Fonction pour masquer tous les éléments ayant la classe "selected" dans le dropdown
