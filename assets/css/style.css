@@ -1,134 +1,62 @@
 body {
-  background-color: #c6c6c6;
-  font-family: "Manrope", sans-serif;
-  margin: 0;
-  padding: 0;
+  background-color: #C6C6C6;
+  font-family: 'Manrope', sans-serif;
 }
 
 h6 {
   margin: 0 !important;
 }
 
-.banner {
-  position: relative;
-}
-
-.img-container {
-  position: relative;
-  width: 100%;
-  height: 70vh;
-}
-
 .img-fluid {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 70vh;
+  position: relative;
 }
 
 .img-fluid-logo {
+  z-index: 1;
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 41px;
+  left: 51px;
   width: 150px;
 }
 
 .text-banner {
+  z-index: 1;
   position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ffd15b;
+  top: 30%;
+  left: 25%;
+  color: #FFD15B;
   text-transform: uppercase;
-  font-size: 40px;
+  font-size: 50px;
   text-align: center;
   font-weight: 700;
-  font-family: "Manrope", sans-serif;
-  margin-bottom: 10px;
-}
+  font-family: 'Manrope', sans-serif;
 
-.form-container {
-  position: absolute;
-  top: calc(50% + 100px); 
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
 }
-
-.form {
-}
-
-.input-container {
-  display: flex;
-  align-items: center;
-}
-
 #search-bar {
   z-index: 1;
   width: 50vw;
-  padding: 15px;
-  position: relative;
-
-}
-
-.selected {
-  display: none !important;
-}
-
-/* #btn-search {
-  z-index: 1;
-  margin-left: 10px;
   position: absolute;
-  right: 10px;
-} */
-
-
-
-/* .form {
+  right: 0;
+  top: 0%;
+  padding: 15px;
+}
+.form {
   position: relative;
-} */
+}
 
-/* .search-icon-bar {
-  cursor: pointer;
-  position: relative;
-  right: 10px;
-  margin-left: -30px;
-  z-index: 1;
-  height: 100%;
-  border: none;
-  background-color: transparent;
-} */
-
-/* #btn-search {
+#btn-search {
   z-index: 1;
   position: absolute;
   right: 10px;
   top: 10px;
-} */
+}
 
-#autocompleteDropdown {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
+.form-container {
   position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 10000;
-}
-
-#autocompleteDropdown li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-#autocompleteDropdown li:hover {
-  background-color: #ffd15b;
-}
-
-.dropdown-menu li:hover {
-  background-color: #ffd15b;
+  top: 43%;
+  left: 77%;
 }
 
 
@@ -151,6 +79,7 @@ h6 {
   object-fit: cover;
   border-top-right-radius: 21px;
   border-top-left-radius: 21px;
+
 }
 
 .img-card {
@@ -167,11 +96,11 @@ h6 {
   border-radius: 21px;
   border: none;
   padding: 0;
-  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .card-body {
-  font-family: "Manrope", sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
 
 .recipes-container {
@@ -198,14 +127,14 @@ h6 {
 }
 
 .name-recipe {
-  font-family: "Anton", sans-serif;
+  font-family: 'Anton', sans-serif;
   font-size: 20px;
 }
 
 .p {
   margin-top: 31px;
   text-transform: uppercase;
-  color: #7a7a7a;
+  color: #7A7A7A;
 }
 
 .p-ingredient-name {
@@ -215,7 +144,7 @@ h6 {
 }
 
 .p-ingredient-quantity {
-  color: #7a7a7a;
+  color: #7A7A7A;
   font-size: 15px;
   margin-top: 0px;
 }
@@ -231,7 +160,8 @@ h6 {
   padding-bottom: 10px;
 }
 .li-drop:hover {
-  background-color: #ffd15b;
+  background-color: #FFD15B;
+
 }
 
 #selectedItemsContainer {
@@ -239,38 +169,46 @@ h6 {
   /* height: 300px; */
 }
 
-.tag-filter {
-  background-color: #ffd15b;
+.tag {
+  background-color: #FFD15B;
   padding: 15px;
   border-radius: 5px;
+  
 }
 
-.badg-primary {
-  background-color: #ffd15b;
-  padding: 15px;
-  border-radius: 5px;
-}
-
-.btn-close-white {
-  --bs-icon-color: #fff;
+.selected {
+display: none !important;
 }
 
 .search-icon {
-  cursor: pointer;
-  position: relative;
-  right: 10px;
-  margin-left: -30px;
-  z-index: 1;
-  height: 100%;
-  border: none;
-  background-color: transparent;
+cursor: pointer;
+position: relative;
+right: 10px;
+margin-left: -30px;
+z-index: 1;
+height: 100%;
+border: none;
+background-color: transparent;
 }
 .search-icon i {
-  color: #888;
+color: #888;
 }
 
 
-
-
-
-
+.search-icone {
+cursor: pointer;
+position: relative;
+right: 10px;
+top: 10px;
+/* margin-left: -30px; */
+z-index: 1;
+height: 100%;
+border: none;
+/* background: darkgray; */
+}
+.search-icone i {
+color: white;
+font-size: 19px;
+padding-top: 5px;
+padding-bottom: 5px;
+}
