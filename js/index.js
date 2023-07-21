@@ -9,6 +9,12 @@ function getRecipe() {
   }
 }
 
+function countDisplayedRecipes() {
+  const recipeContainer = document.getElementById('recipeContainer');
+  const displayedRecipesCount = recipeContainer.childElementCount;
+  return displayedRecipesCount;
+}
+
 // Affiche les recettes filtrées
 function displayRecipe() {
   const recipesData = getRecipe();
@@ -22,6 +28,13 @@ function displayRecipe() {
     const recipeCardDom = recipeModel.getRecipeCardDom();
     recipeContainer.appendChild(recipeCardDom);
   }
+      // Appeler la fonction pour obtenir le nombre de recettes affichées au chargement de la page
+      const displayedRecipesCount = countDisplayedRecipes();
+      const textBanner = document.querySelector('.text-filter');
+      const bannerText = ` ${displayedRecipesCount} recettes`;
+      textBanner.innerHTML = bannerText;
+    
+      console.log('Nombre de recettes affichées au chargement de la page :', displayedRecipesCount);
 }
 
 
@@ -171,6 +184,13 @@ function filterRecipes() {
   updateIngredientsDropdown(filteredRecipes);
   updateApplianceDropdown(filteredRecipes);
   updateUstensilsDropdown(filteredRecipes);
+      // Appeler la fonction pour obtenir le nombre de recettes affichées au chargement de la page
+      const displayedRecipesCount = countDisplayedRecipes();
+      const textBanner = document.querySelector('.text-filter');
+      const bannerText = ` ${displayedRecipesCount} recettes`;
+      textBanner.innerHTML = bannerText;
+    
+      console.log('Nombre de recettes affichées au chargement de la page :', displayedRecipesCount);
 }
 
 
