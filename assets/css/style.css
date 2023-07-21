@@ -179,3 +179,37 @@ h6 {
 .selected {
   display: none !important;
 }
+
+.search-icon {
+  cursor: pointer;
+  position: relative;
+  right: 10px;
+  margin-left: -30px;
+  z-index: 1;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+}
+.search-icon i {
+  color: #888;
+}
+
+
+.search-icone {
+  cursor: pointer;
+  position: relative;
+  right: 10px;
+  top: 10px;
+  /* margin-left: -30px; */
+  z-index: 1;
+  height: 100%;
+  border: none;
+  /* background: darkgray; */
+}
+.search-icone i {
+  color: white;
+  font-size: 19px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
