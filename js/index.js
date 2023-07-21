@@ -10,6 +10,11 @@ function getRecipe() {
   }
   // let filteredRecipes = []; 
   
+  function countDisplayedRecipes() {
+    const recipeContainer = document.getElementById('recipeContainer');
+    const displayedRecipesCount = recipeContainer.childElementCount;
+    return displayedRecipesCount;
+  }
   
   
   // Cette fonction affiche toutes les recettes dans le conteneur HTML avec l'ID recipeContainer.
@@ -26,6 +31,13 @@ function getRecipe() {
       const recipeCardDom = recipeModel.getRecipeCardDom(); // Récupère la représentation DOM de la carte de recette
       recipeContainer.appendChild(recipeCardDom); // Ajoute la carte de recette au conteneur de recettes
     });
+    // Appeler la fonction pour obtenir le nombre de recettes affichées au chargement de la page
+  const displayedRecipesCount = countDisplayedRecipes();
+  const textBanner = document.querySelector('.text-filter');
+  const bannerText = ` ${displayedRecipesCount} recettes`;
+  textBanner.innerHTML = bannerText;
+
+  console.log('Nombre de recettes affichées au chargement de la page :', displayedRecipesCount);
   }
   // fonction prend un texte en entrée et normalise les caractères diacritiques en caractères de base (par exemple, é -> e, ç -> c).
   function normalizeString(text) {
@@ -122,7 +134,8 @@ function filterByUstensils(recipesData, searchText) {
     updateUstensilsDropdown(filteredRecipes)
     return filteredRecipes;
   }
-  
+
+
   function filterRecipes() {
     const searchText = normalizeString(searchInput.value.toLowerCase());
     const selectedBadges = selectedItemsContainer.querySelectorAll('.tag');
@@ -147,6 +160,12 @@ function filterByUstensils(recipesData, searchText) {
     updateIngredientsDropdown(filteredRecipes);
     updateApplianceDropdown(filteredRecipes);
     updateUstensilsDropdown(filteredRecipes)
+    // Appeler la fonction pour obtenir le nombre de recettes affichées
+  const displayedRecipesCount = countDisplayedRecipes();
+  const textBanner = document.querySelector('.text-filter');
+  const bannerText = ` ${displayedRecipesCount} recettes`;
+  textBanner.innerHTML = bannerText;
+  console.log('Nombre de recettes affichées :', displayedRecipesCount);
   }
   
   
