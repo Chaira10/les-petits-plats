@@ -1,3 +1,5 @@
+function testCode() {
+
 // Récupère les données des recettes
 function getRecipe() {
   try {
@@ -482,3 +484,14 @@ function searchList(inputId, listId) {
 document.getElementById("ingredient").addEventListener("input", function() {
   searchList("ingredient", "ingredientsDropdown");
   });
+
+}
+
+// Avant l'exécution de la fonction
+console.log("Heure de début :", performance.now());
+
+// Appelez la fonction `testCode()` pour mesurer le temps d'exécution de votre code
+testCode();
+
+// Après l'exécution de la fonction
+console.log("Heure de fin :", performance.now());
