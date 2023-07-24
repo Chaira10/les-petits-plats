@@ -1,3 +1,5 @@
+function testCode() {
+
 // Cette fonction récupère les données des recettes depuis une source appelée recipes.
 function getRecipe() {
     try {
@@ -167,10 +169,6 @@ function filterByUstensils(recipesData, searchText) {
   textBanner.innerHTML = bannerText;
   console.log('Nombre de recettes affichées :', displayedRecipesCount);
   }
-  
-  
-  
-  
   displayRecipe(); // Affiche les recettes au chargement de la page
 
   const searchInput = document.getElementById('search-bar');
@@ -483,3 +481,13 @@ searchInput.addEventListener('input', function() {
   
     }
   });
+}
+
+// Avant l'exécution de la fonction
+console.log("Heure de début :", performance.now());
+
+// Appelez la fonction `testCode()` pour mesurer le temps d'exécution de votre code
+testCode();
+
+// Après l'exécution de la fonction
+console.log("Heure de fin :", performance.now());
