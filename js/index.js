@@ -187,7 +187,7 @@ function filterRecipes() {
   updateApplianceDropdown(filteredRecipes);
   updateUstensilsDropdown(filteredRecipes);
       // Appeler la fonction pour obtenir le nombre de recettes affichées au chargement de la page
-      const displayedRecipesCount = countDisplayedRecipes();
+      const displayedRecipesCount = filteredRecipes.length;
       const textBanner = document.querySelector('.text-filter');
       const bannerText = ` ${displayedRecipesCount} recettes`;
       textBanner.innerHTML = bannerText;
