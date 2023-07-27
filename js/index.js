@@ -203,15 +203,22 @@ const searchInput = document.getElementById('search-bar');
 searchInput.addEventListener('input', filterRecipes);
 
 
-
+const noResultsText = "Aucun résultat pour cette recherche.";
 function displayFilteredRecipes(filteredRecipes) {
   const recipeContainer = document.getElementById('recipeContainer');
   recipeContainer.innerHTML = '';
 
-  for (const recipe of filteredRecipes) {
-    const recipeModel = recipeFactory(recipe);
-    const recipeCardDom = recipeModel.getRecipeCardDom();
-    recipeContainer.appendChild(recipeCardDom);
+  if (filteredRecipes.length === 0) {
+    const noResultsDiv = document.createElement('div');
+    noResultsDiv.classList.add('no-results');
+    noResultsDiv.textContent = noResultsText;
+    recipeContainer.appendChild(noResultsDiv);
+  } else {
+    for (const recipe of filteredRecipes) {
+      const recipeModel = recipeFactory(recipe);
+      const recipeCardDom = recipeModel.getRecipeCardDom();
+      recipeContainer.appendChild(recipeCardDom);
+    }
   }
 }
 const ingredientsDropdown = document.getElementById('ingredientList');
