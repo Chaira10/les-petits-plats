@@ -163,7 +163,7 @@ function filterByUstensils(recipesData, searchText) {
     updateApplianceDropdown(filteredRecipes);
     updateUstensilsDropdown(filteredRecipes)
     // Appeler la fonction pour obtenir le nombre de recettes affichées
-  const displayedRecipesCount = countDisplayedRecipes();
+  const displayedRecipesCount = filteredRecipes.length;
   const textBanner = document.querySelector('.text-filter');
   const bannerText = ` ${displayedRecipesCount} recettes`;
   textBanner.innerHTML = bannerText;
@@ -174,16 +174,26 @@ function filterByUstensils(recipesData, searchText) {
   const searchInput = document.getElementById('search-bar');
 searchInput.addEventListener('input', filterRecipes);
 
-
+const noResultsText = "Aucun résultat pour cette recherche.";
 function displayFilteredRecipes(filteredRecipes) {
   const recipeContainer = document.getElementById('recipeContainer');
   recipeContainer.innerHTML = ''; // Efface le contenu précédent du conteneur de recettes
 
-  filteredRecipes.forEach((recipe) => {
-    const recipeModel = recipeFactory(recipe);
-    const recipeCardDom = recipeModel.getRecipeCardDom();
-    recipeContainer.appendChild(recipeCardDom);
-  });
+  if (filteredRecipes.length === 0) {
+    // Display message for no results
+    const noResultsDiv = document.createElement('div');
+    noResultsDiv.classList.add('no-results');
+    noResultsDiv.textContent = noResultsText;
+    recipeContainer.appendChild(noResultsDiv);
+  } else {
+    recipeContainer.innerHTML = ''; // Clear previous content of the recipe container
+
+    filteredRecipes.forEach((recipe) => {
+      const recipeModel = recipeFactory(recipe);
+      const recipeCardDom = recipeModel.getRecipeCardDom();
+      recipeContainer.appendChild(recipeCardDom);
+    });
+  }
 }
 
 
