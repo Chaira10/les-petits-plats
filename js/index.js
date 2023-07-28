@@ -1,10 +1,8 @@
-function testCode() {
-
 // Cette fonction récupère les données des recettes depuis une source appelée recipes.
 function getRecipe() {
     try {
       const data = recipes; // Récupère les données des recettes (insertion des datas dans le index.html)
-      console.log(data);
+      // console.log(data);
       return data; // Retourne les données des recettes
     } catch (error) {
       console.error(error);
@@ -22,7 +20,7 @@ function getRecipe() {
   // Cette fonction affiche toutes les recettes dans le conteneur HTML avec l'ID recipeContainer.
   function displayRecipe() {
     const recipesData = getRecipe(); // appelle getRecipe() pour obtenir les données des recettes.
-    console.log(recipesData);
+    // console.log(recipesData);
   
     const recipeContainer = document.getElementById('recipeContainer'); // Élément HTML qui contiendra les cartes de recettes
     recipeContainer.innerHTML = ''; 
@@ -39,7 +37,7 @@ function getRecipe() {
   const bannerText = ` ${displayedRecipesCount} recettes`;
   textBanner.innerHTML = bannerText;
 
-  console.log('Nombre de recettes affichées au chargement de la page :', displayedRecipesCount);
+  // console.log('Nombre de recettes affichées au chargement de la page :', displayedRecipesCount);
   }
   // fonction prend un texte en entrée et normalise les caractères diacritiques en caractères de base (par exemple, é -> e, ç -> c).
   function normalizeString(text) {
@@ -148,6 +146,10 @@ function filterByUstensils(recipesData, searchText) {
   
     if (searchText.length >= 3) {
       filteredRecipes = filterByRecipeName(filteredRecipes, searchText);
+      // filteredRecipes = filterByUstensils(filteredRecipes, searchText);
+      // filteredRecipes = filterByAppliance(filteredRecipes, searchText);
+      // filteredRecipes = filterByDescription(filteredRecipes, searchText);
+      // filteredRecipes = filterByIngredients(filteredRecipes, searchText);
     }
   
     if (selectedItemsContainer.children.length > 0) {
@@ -167,12 +169,15 @@ function filterByUstensils(recipesData, searchText) {
   const textBanner = document.querySelector('.text-filter');
   const bannerText = ` ${displayedRecipesCount} recettes`;
   textBanner.innerHTML = bannerText;
-  console.log('Nombre de recettes affichées :', displayedRecipesCount);
+  // console.log('Nombre de recettes affichées :', displayedRecipesCount);
   }
   displayRecipe(); // Affiche les recettes au chargement de la page
 
   const searchInput = document.getElementById('search-bar');
-searchInput.addEventListener('input', filterRecipes);
+  searchInput.addEventListener('input', filterRecipes);
+
+
+
 
 const noResultsText = "Aucun résultat pour cette recherche.";
 function displayFilteredRecipes(filteredRecipes) {
@@ -242,11 +247,11 @@ function generateIngredientsOptions() {
         ingredientsSet.add(ingredientName);
       });
     });
-    console.log("Ingredients Set:", ingredientsSet);
+    // console.log("Ingredients Set:", ingredientsSet);
     const ingredientsList = ingredientsDropdown.querySelectorAll('li');
     ingredientsList.forEach((item) => {
       const ingredient = item.textContent.toLowerCase();
-      console.log("Current Ingredient:", ingredient);
+      // console.log("Current Ingredient:", ingredient);
       if (ingredientsSet.has(ingredient)) {
         item.style.display = "";
       } else {
@@ -426,7 +431,7 @@ function handleSelection(event) {
 
   // Vérifier si l'élément de la liste déroulante a déjà la classe "selected"
   if (!event.target.classList.contains('selected')) {
-    console.log(selectedItem);
+    // console.log(selectedItem);
     createBadge(selectedItem);
     // Supprimer l'écouteur d'événements de clic pour cet élément
     event.target.removeEventListener('click', handleSelection);
@@ -447,9 +452,6 @@ const dropdowns = document.querySelectorAll('.dropdown-item');
 dropdowns.forEach((item) => {
   item.addEventListener('click', handleSelection);
 });
-
-
-
 
 
 // Fonction de recherche générique
@@ -475,10 +477,10 @@ document.getElementById("ingredient").addEventListener("input", function() {
   searchList("ingredient", "ingredientsDropdown");
 });
 
-searchInput.addEventListener('input', function() {
-    const searchText = searchInput.value.toLowerCase();
+// searchInput.addEventListener('input', function() {
+//     const searchText = searchInput.value.toLowerCase();
     
-    if (searchText === '') {
+    // if (searchText === '') {
       // updateAllDropdowns();
   
       // updateIngredientsDropdown(filteredRecipes);
@@ -489,15 +491,54 @@ searchInput.addEventListener('input', function() {
       //   item.addEventListener('click', handleSelection);
       // });
   
-    }
+    // }
+  // });
+
+
+
+
+// Fonction pour mesurer le temps d'exécution de la fonction filterRecipes
+function testFilterRecipesPerformance() {
+  // Avant l'exécution de la fonction
+  const startTime = performance.now();
+
+  // Exécution de la fonction filterRecipes
+  filterRecipes();
+
+  // Après l'exécution de la fonction
+  const endTime = performance.now();
+  
+  // Calculer la durée d'exécution en millisecondes
+  const duration = endTime - startTime;
+
+  console.log("Durée d'exécution :", duration, "ms");
+}
+
+// // Appeler la fonction testFilterRecipesPerformance pour mesurer les performances de filterRecipes
+
+// Fonction pour tester les performances de filterRecipes avec différentes valeurs de recherche simulées
+function testFilterRecipesPerformanceWithInputValues() {
+  const inputValues = ['tomate', 'tarte', 'limonade', 'soupe', 'salade'];
+
+  inputValues.forEach((inputValue) => {
+    console.log(`Recherche pour "${inputValue}":`);
+    // Simuler l'entrée dans l'input avec la valeur de recherche actuelle
+    simulateInput(inputValue, document.getElementById('search-bar'));
+
+    // Mesurer les performances de filterRecipes pour la valeur de recherche actuelle
+    testFilterRecipesPerformance();
+
+    console.log('------------------------');
   });
 }
 
-// Avant l'exécution de la fonction
-console.log("Heure de début :", performance.now());
+// testFilterRecipesPerformance();
+function simulateInput(inputValue) {
+  const searchInput = document.getElementById('search-bar');
+  searchInput.value = inputValue;
+  const event = new Event('input', { bubbles: true });
+  searchInput.dispatchEvent(event);
+}
 
-// Appelez la fonction `testCode()` pour mesurer le temps d'exécution de votre code
-testCode();
-
-// Après l'exécution de la fonction
-console.log("Heure de fin :", performance.now());
+// Appeler la fonction testFilterRecipesPerformanceWithInputValues pour tester les performances avec différentes valeurs de recherche simulées
+testFilterRecipesPerformanceWithInputValues();
