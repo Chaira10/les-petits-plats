@@ -1,11 +1,11 @@
-function testCode() {
+
 
 // Récupère les données des recettes
 function getRecipe() {
   try {
     const data = recipes; // Récupère les données des recettes (assumant que la variable 'recipes' est définie ailleurs)
     return data; // Retourne les données des recettes
-    console.log(data);
+    // console.log(data);
   } catch (error) {
     console.error(error);
   }
@@ -20,7 +20,7 @@ function countDisplayedRecipes() {
 // Affiche les recettes filtrées
 function displayRecipe() {
   const recipesData = getRecipe();
-  console.log(recipesData);
+  // console.log(recipesData);
 
   const recipeContainer = document.getElementById('recipeContainer');
   recipeContainer.innerHTML = '';
@@ -36,7 +36,7 @@ function displayRecipe() {
       const bannerText = ` ${displayedRecipesCount} recettes`;
       textBanner.innerHTML = bannerText;
     
-      console.log('Nombre de recettes affichées au chargement de la page :', displayedRecipesCount);
+      // console.log('Nombre de recettes affichées au chargement de la page :', displayedRecipesCount);
 }
 
 
@@ -192,7 +192,7 @@ function filterRecipes() {
       const bannerText = ` ${displayedRecipesCount} recettes`;
       textBanner.innerHTML = bannerText;
     
-      console.log('Nombre de recettes affichées au chargement de la page :', displayedRecipesCount);
+      // console.log('Nombre de recettes affichées au chargement de la page :', displayedRecipesCount);
 }
 
 
@@ -264,12 +264,12 @@ function updateIngredientsDropdown(filteredRecipes) {
       ingredientsSet.add(ingredientName);
     }
   }
-  console.log("Ingredients Set:", ingredientsSet);
+  // console.log("Ingredients Set:", ingredientsSet);
 
   const ingredientsList = ingredientsDropdown.querySelectorAll('li');
   for (const item of ingredientsList) {
     const ingredient = item.textContent.toLowerCase();
-    console.log("Current Ingredient:", ingredient);
+    // console.log("Current Ingredient:", ingredient);
     if (ingredientsSet.has(ingredient)) {
       item.style.display = "";
     } else {
@@ -449,7 +449,7 @@ function removeSelectedItem(badge) {
     
     // Vérifier si l'élément de la liste déroulante a déjà la classe "selected"
     if (!event.target.classList.contains('selected')) {
-      console.log(selectedItem);
+      // console.log(selectedItem);
       createBadge(selectedItem);
       // Supprimer l'écouteur d'événements de clic pour cet élément
       event.target.removeEventListener('click', handleSelection);
@@ -492,13 +492,53 @@ document.getElementById("ingredient").addEventListener("input", function() {
   searchList("ingredient", "ingredientsDropdown");
   });
 
+
+  // Fonction pour mesurer le temps d'exécution de la fonction filterRecipes
+function testFilterRecipesPerformance() {
+  // Avant l'exécution de la fonction
+  const startTime = performance.now();
+
+  // Exécution de la fonction filterRecipes
+  filterRecipes();
+
+  // Après l'exécution de la fonction
+  const endTime = performance.now();
+  
+  // Calculer la durée d'exécution en millisecondes
+  const duration = endTime - startTime;
+
+  console.log("Durée d'exécution :", duration, "ms");
 }
 
-// Avant l'exécution de la fonction
-console.log("Heure de début :", performance.now());
+// // Appeler la fonction testFilterRecipesPerformance pour mesurer les performances de filterRecipes
 
-// Appelez la fonction `testCode()` pour mesurer le temps d'exécution de votre code
-testCode();
+// Fonction pour tester les performances de filterRecipes avec différentes valeurs de recherche simulées
+function testFilterRecipesPerformanceWithInputValues() {
+  const inputValues = ['tomate', 'tarte', 'limonade', 'soupe', 'salade'];
 
-// Après l'exécution de la fonction
-console.log("Heure de fin :", performance.now());
+  inputValues.forEach((inputValue) => {
+    console.log(`Recherche pour "${inputValue}":`);
+    // Simuler l'entrée dans l'input avec la valeur de recherche actuelle
+    simulateInput(inputValue, document.getElementById('search-bar'));
+
+    // Mesurer les performances de filterRecipes pour la valeur de recherche actuelle
+    testFilterRecipesPerformance();
+
+    console.log('------------------------');
+  });
+}
+
+// testFilterRecipesPerformance();
+function simulateInput(inputValue) {
+  const searchInput = document.getElementById('search-bar');
+  searchInput.value = inputValue;
+  const event = new Event('input', { bubbles: true });
+  searchInput.dispatchEvent(event);
+}
+
+// Appeler la fonction testFilterRecipesPerformanceWithInputValues pour tester les performances avec différentes valeurs de recherche simulées
+testFilterRecipesPerformanceWithInputValues();
+
+
+
+
