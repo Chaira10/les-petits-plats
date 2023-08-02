@@ -1,5 +1,3 @@
-
-
 // Récupère les données des recettes
 function getRecipe() {
   try {
@@ -46,44 +44,56 @@ function normalizeString(text) {
 
 function filterByRecipeName(recipesData, searchText) {
   const filteredRecipes = [];
+  const normalizedSearchText = normalizeString(searchText.toLowerCase());
+
+  let filteredIndex = 0;
   for (const recipe of recipesData) {
-    const recipeName = normalizeString(recipe.name.toLowerCase());
-    if (recipeName.includes(searchText)) {
-      filteredRecipes.push(recipe);
+    const normalizedRecipeName = normalizeString(recipe.name.toLowerCase());
+    if (normalizedRecipeName.indexOf(normalizedSearchText) !== -1) {
+      filteredRecipes[filteredIndex] = recipe;
+      filteredIndex++;
     }
   }
+
   return filteredRecipes;
 }
+
 
 
 
 function filterByIngredients(recipesData, searchText) {
   const filteredRecipes = [];
+  const normalizedSearchText = normalizeString(searchText.toLowerCase());
+
+  let filteredIndex = 0;
   for (const recipe of recipesData) {
     for (const ingredient of recipe.ingredients) {
       const ingredientName = normalizeString(ingredient.ingredient.toLowerCase());
-      if (ingredientName.includes(searchText)) {
-        filteredRecipes.push(recipe);
+      if (ingredientName.indexOf(normalizedSearchText) !== -1) {
+        filteredRecipes[filteredIndex] = recipe;
+        filteredIndex++;
         break;
       }
     }
   }
-  
+
   updateIngredientsDropdown(filteredRecipes);
   updateApplianceDropdown(filteredRecipes);
   updateUstensilsDropdown(filteredRecipes);
-
   return filteredRecipes;
 }
 
 
-
 function filterByDescription(recipesData, searchText) {
   const filteredRecipes = [];
+  const normalizedSearchText = normalizeString(searchText.toLowerCase());
+
+  let filteredIndex = 0;
   for (const recipe of recipesData) {
     const description = normalizeString(recipe.description.toLowerCase());
-    if (description.includes(searchText)) {
-      filteredRecipes.push(recipe);
+    if (description.indexOf(normalizedSearchText) !== -1) {
+      filteredRecipes[filteredIndex] = recipe;
+      filteredIndex++;
     }
   }
 
@@ -95,12 +105,17 @@ function filterByDescription(recipesData, searchText) {
 }
 
 
+
 function filterByAppliance(recipesData, searchText) {
   const filteredRecipes = [];
+  const normalizedSearchText = normalizeString(searchText.toLowerCase());
+
+  let filteredIndex = 0;
   for (const recipe of recipesData) {
     const appliance = normalizeString(recipe.appliance.toLowerCase());
-    if (appliance.includes(searchText)) {
-      filteredRecipes.push(recipe);
+    if (appliance.indexOf(normalizedSearchText) !== -1) {
+      filteredRecipes[filteredIndex] = recipe;
+      filteredIndex++;
     }
   }
 
@@ -115,13 +130,21 @@ function filterByAppliance(recipesData, searchText) {
 
 function filterByUstensils(recipesData, searchText) {
   const filteredRecipes = [];
+  const normalizedSearchText = normalizeString(searchText.toLowerCase());
+
+  let filteredIndex = 0;
   for (const recipe of recipesData) {
+    let ustensilFound = false;
     for (const ustensil of recipe.ustensils) {
       const ustensilName = normalizeString(ustensil.toLowerCase());
-      if (ustensilName.includes(searchText)) {
-        filteredRecipes.push(recipe);
+      if (ustensilName.indexOf(normalizedSearchText) !== -1) {
+        ustensilFound = true;
         break;
       }
+    }
+    if (ustensilFound) {
+      filteredRecipes[filteredIndex] = recipe;
+      filteredIndex++;
     }
   }
 
@@ -131,29 +154,42 @@ function filterByUstensils(recipesData, searchText) {
 
   return filteredRecipes;
 }
+
 
 
 
 function filterBySelectedItems(recipesData, selectedItems) {
   const filteredRecipes = [];
-  for (const recipe of recipesData) {
-    const normalizedItems = selectedItems.map((item) => normalizeString(item.toLowerCase()));
+  const normalizedSelectedItems = [];
+  
+  for (let i = 0; i < selectedItems.length; i++) {
+    normalizedSelectedItems[i] = normalizeString(selectedItems[i].toLowerCase());
+  }
+
+  for (let i = 0; i < recipesData.length; i++) {
+    const recipe = recipesData[i];
     const { name, ingredients, description, appliance, ustensils } = recipe;
     const normalizedName = normalizeString(name.toLowerCase());
     const normalizedDescription = normalizeString(description.toLowerCase());
     const normalizedAppliance = normalizeString(appliance.toLowerCase());
 
-    if (
-      normalizedItems.some(
-        (item) =>
-          normalizedName.includes(item) ||
-          ingredients.some((ingredient) => normalizeString(ingredient.ingredient.toLowerCase()).includes(item)) ||
-          normalizedDescription.includes(item) ||
-          normalizedAppliance.includes(item) ||
-          ustensils.some((ustensil) => normalizeString(ustensil.toLowerCase()).includes(item))
-      )
-    ) {
-      filteredRecipes.push(recipe);
+    let found = false;
+    for (let j = 0; j < normalizedSelectedItems.length; j++) {
+      const item = normalizedSelectedItems[j];
+      if (
+        normalizedName.indexOf(item) !== -1 ||
+        ingredientsMatch(ingredients, item) ||
+        normalizedDescription.indexOf(item) !== -1 ||
+        normalizedAppliance.indexOf(item) !== -1 ||
+        ustensilsMatch(ustensils, item)
+      ) {
+        found = true;
+        break;
+      }
+    }
+
+    if (found) {
+      filteredRecipes[filteredRecipes.length] = recipe;
     }
   }
 
@@ -163,6 +199,28 @@ function filterBySelectedItems(recipesData, selectedItems) {
 
   return filteredRecipes;
 }
+
+function ingredientsMatch(ingredients, item) {
+  for (let i = 0; i < ingredients.length; i++) {
+    const ingredientName = normalizeString(ingredients[i].ingredient.toLowerCase());
+    if (ingredientName.indexOf(item) !== -1) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function ustensilsMatch(ustensils, item) {
+  for (let i = 0; i < ustensils.length; i++) {
+    const ustensilName = normalizeString(ustensils[i].toLowerCase());
+    if (ustensilName.indexOf(item) !== -1) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
 
 
 function filterRecipes() {
@@ -537,7 +595,7 @@ function simulateInput(inputValue) {
 }
 
 // Appeler la fonction testFilterRecipesPerformanceWithInputValues pour tester les performances avec différentes valeurs de recherche simulées
-testFilterRecipesPerformanceWithInputValues();
+// testFilterRecipesPerformanceWithInputValues();
 
 
 
