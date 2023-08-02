@@ -157,7 +157,7 @@ function filterByUstensils(recipesData, searchText) {
           const ustensilName = normalizeString(ustensil.toLowerCase());
           return ustensilName.includes(searchText);
         });
-  
+        
         return recipeName.includes(searchText) || ingredientMatch || descriptionMatch || applianceMatch || ustensilsMatch;
       });
     }
