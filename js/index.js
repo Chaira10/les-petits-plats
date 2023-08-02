@@ -145,12 +145,23 @@ function filterByUstensils(recipesData, searchText) {
     let filteredRecipes = recipesData;
   
     if (searchText.length >= 3) {
-      filteredRecipes = filterByRecipeName(filteredRecipes, searchText);
-      // filteredRecipes = filterByUstensils(filteredRecipes, searchText);
-      // filteredRecipes = filterByAppliance(filteredRecipes, searchText);
-      // filteredRecipes = filterByDescription(filteredRecipes, searchText);
-      // filteredRecipes = filterByIngredients(filteredRecipes, searchText);
+      filteredRecipes = recipesData.filter((recipe) => {
+        const recipeName = normalizeString(recipe.name.toLowerCase());
+        const ingredientMatch = recipe.ingredients.some((ingredient) => {
+          const ingredientName = normalizeString(ingredient.ingredient.toLowerCase());
+          return ingredientName.includes(searchText);
+        });
+        const descriptionMatch = normalizeString(recipe.description.toLowerCase()).includes(searchText);
+        const applianceMatch = normalizeString(recipe.appliance.toLowerCase()).includes(searchText);
+        const ustensilsMatch = recipe.ustensils.some((ustensil) => {
+          const ustensilName = normalizeString(ustensil.toLowerCase());
+          return ustensilName.includes(searchText);
+        });
+  
+        return recipeName.includes(searchText) || ingredientMatch || descriptionMatch || applianceMatch || ustensilsMatch;
+      });
     }
+
   
     if (selectedItemsContainer.children.length > 0) {
       const selectedItems = Array.from(selectedItemsContainer.querySelectorAll('.tag')).map((badge) =>
@@ -227,13 +238,6 @@ function generateIngredientsOptions() {
     dropdowns.forEach((item) => {
       item.addEventListener('click', handleSelection);
     });
-  
-    // ingredientsOptions.forEach((ingredient) => {
-    //   const li = document.createElement('li');
-    //   li.classList.add('dropdown-item');
-    //   li.innerHTML = `${ingredient}`;
-    //   ingredientsDropdown.appendChild(li);
-    // });
   }
   
   generateIngredientsOptions();
@@ -327,13 +331,14 @@ function generateIngredientsOptions() {
     });
   
     const ustensilsOptions = Array.from(ustensilsSet).sort();
-  
-    ustensilsOptions.forEach((ustensil) => {
-      const li = document.createElement('li');
-      li.classList.add('dropdown-item');
-      li.innerHTML = `${ustensil}`;
-      ustensilsDropdown.appendChild(li);
-    });
+    ustensilsDropdown.innerHTML = `
+    ${ustensilsOptions.map(e => `<li class="dropdown-item">${e}</li>`).join('')}`
+    // ustensilsOptions.forEach((ustensil) => {
+    //   const li = document.createElement('li');
+    //   li.classList.add('dropdown-item');
+    //   li.innerHTML = `${ustensil}`;
+    //   ustensilsDropdown.appendChild(li);
+    // });
   }
   
   generateUstensilsOptions();
@@ -365,8 +370,6 @@ function generateIngredientsOptions() {
     });
   }
 
-  
-
   // Fonction pour masquer tous les éléments ayant la classe "selected" dans le dropdown
 function hideSelectedItems() {
   const dropdowns = document.querySelectorAll('.dropdown-item');
@@ -377,13 +380,7 @@ function hideSelectedItems() {
   });
 }
 
-  
-  
-
   const selectedItemsContainer = document.getElementById('selectedItemsContainer');
-
-
-
 
   function createBadge(item) {
     const trimmedItem = item.trim();
@@ -477,68 +474,58 @@ document.getElementById("ingredient").addEventListener("input", function() {
   searchList("ingredient", "ingredientsDropdown");
 });
 
-// searchInput.addEventListener('input', function() {
-//     const searchText = searchInput.value.toLowerCase();
-    
-    // if (searchText === '') {
-      // updateAllDropdowns();
+document.getElementById("appareils").addEventListener("input", function() {
+  searchList("appareils", "appareilsDropdown");
+});
+
+document.getElementById("ustensiles").addEventListener("input", function() {
+  searchList("ustensiles", "ustensilsDropdown");
+});
+
+
+// test performance
+// // Fonction pour mesurer le temps d'exécution de la fonction filterRecipes
+// function testFilterRecipesPerformance() {
+//   // Avant l'exécution de la fonction
+//   const startTime = performance.now();
+
+//   // Exécution de la fonction filterRecipes
+//   filterRecipes();
+
+//   // Après l'exécution de la fonction
+//   const endTime = performance.now();
   
-      // updateIngredientsDropdown(filteredRecipes);
-      // removeSelectedItem(badge)
-      // Ajouter des écouteurs d'événements aux éléments de tous les dropdowns
-      // const dropdowns = document.querySelectorAll('.dropdown-item');
-      // dropdowns.forEach((item) => {
-      //   item.addEventListener('click', handleSelection);
-      // });
-  
-    // }
-  // });
+//   // Calculer la durée d'exécution en millisecondes
+//   const duration = endTime - startTime;
 
+//   console.log("Durée d'exécution :", duration, "ms");
+// }
 
+// // // Appeler la fonction testFilterRecipesPerformance pour mesurer les performances de filterRecipes
 
+// // Fonction pour tester les performances de filterRecipes avec différentes valeurs de recherche simulées
+// function testFilterRecipesPerformanceWithInputValues() {
+//   const inputValues = ['tomate', 'tarte', 'limonade', 'soupe', 'salade'];
 
-// Fonction pour mesurer le temps d'exécution de la fonction filterRecipes
-function testFilterRecipesPerformance() {
-  // Avant l'exécution de la fonction
-  const startTime = performance.now();
+//   inputValues.forEach((inputValue) => {
+//     console.log(`Recherche pour "${inputValue}":`);
+//     // Simuler l'entrée dans l'input avec la valeur de recherche actuelle
+//     simulateInput(inputValue, document.getElementById('search-bar'));
 
-  // Exécution de la fonction filterRecipes
-  filterRecipes();
+//     // Mesurer les performances de filterRecipes pour la valeur de recherche actuelle
+//     testFilterRecipesPerformance();
 
-  // Après l'exécution de la fonction
-  const endTime = performance.now();
-  
-  // Calculer la durée d'exécution en millisecondes
-  const duration = endTime - startTime;
+//     console.log('------------------------');
+//   });
+// }
 
-  console.log("Durée d'exécution :", duration, "ms");
-}
+// // testFilterRecipesPerformance();
+// function simulateInput(inputValue) {
+//   const searchInput = document.getElementById('search-bar');
+//   searchInput.value = inputValue;
+//   const event = new Event('input', { bubbles: true });
+//   searchInput.dispatchEvent(event);
+// }
 
-// // Appeler la fonction testFilterRecipesPerformance pour mesurer les performances de filterRecipes
-
-// Fonction pour tester les performances de filterRecipes avec différentes valeurs de recherche simulées
-function testFilterRecipesPerformanceWithInputValues() {
-  const inputValues = ['tomate', 'tarte', 'limonade', 'soupe', 'salade'];
-
-  inputValues.forEach((inputValue) => {
-    console.log(`Recherche pour "${inputValue}":`);
-    // Simuler l'entrée dans l'input avec la valeur de recherche actuelle
-    simulateInput(inputValue, document.getElementById('search-bar'));
-
-    // Mesurer les performances de filterRecipes pour la valeur de recherche actuelle
-    testFilterRecipesPerformance();
-
-    console.log('------------------------');
-  });
-}
-
-// testFilterRecipesPerformance();
-function simulateInput(inputValue) {
-  const searchInput = document.getElementById('search-bar');
-  searchInput.value = inputValue;
-  const event = new Event('input', { bubbles: true });
-  searchInput.dispatchEvent(event);
-}
-
-// Appeler la fonction testFilterRecipesPerformanceWithInputValues pour tester les performances avec différentes valeurs de recherche simulées
-testFilterRecipesPerformanceWithInputValues();
+// // Appeler la fonction testFilterRecipesPerformanceWithInputValues pour tester les performances avec différentes valeurs de recherche simulées
+// testFilterRecipesPerformanceWithInputValues();
