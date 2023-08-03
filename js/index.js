@@ -43,71 +43,71 @@ function normalizeString(text) {
   return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-// Fonction pour filtrer les recettes par nom
-function filterByRecipeName(recipesData, searchText) {
-  return recipesData.filter((recipe) => {
-    const recipeName = normalizeString(recipe.name.toLowerCase());
-    return recipeName.includes(searchText);
-  });
-}
+// // Fonction pour filtrer les recettes par nom
+// function filterByRecipeName(recipesData, searchText) {
+//   return recipesData.filter((recipe) => {
+//     const recipeName = normalizeString(recipe.name.toLowerCase());
+//     return recipeName.includes(searchText);
+//   });
+// }
 
-// Fonction pour filtrer les recettes par ingrédients
-function filterByIngredients(recipesData, searchText) {
-  const filteredRecipes = recipesData.filter((recipe) => {
-    return recipe.ingredients.some((ingredient) => {
-      const ingredientName = normalizeString(
-        ingredient.ingredient.toLowerCase()
-      );
-      return ingredientName.includes(searchText);
-    });
-  });
+// // Fonction pour filtrer les recettes par ingrédients
+// function filterByIngredients(recipesData, searchText) {
+//   const filteredRecipes = recipesData.filter((recipe) => {
+//     return recipe.ingredients.some((ingredient) => {
+//       const ingredientName = normalizeString(
+//         ingredient.ingredient.toLowerCase()
+//       );
+//       return ingredientName.includes(searchText);
+//     });
+//   });
 
-  updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
-  updateApplianceDropdown(filteredRecipes);
-  updateUstensilsDropdown(filteredRecipes);
-  return filteredRecipes; // Renvoyer les recettes filtrées
-}
+//   updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
+//   updateApplianceDropdown(filteredRecipes);
+//   updateUstensilsDropdown(filteredRecipes);
+//   return filteredRecipes; // Renvoyer les recettes filtrées
+// }
 
-// Fonction pour filtrer les recettes par description
-function filterByDescription(recipesData, searchText) {
-  const filteredRecipes = recipesData.filter((recipe) => {
-    const description = normalizeString(recipe.description.toLowerCase());
-    return description.includes(searchText);
-  });
+// // Fonction pour filtrer les recettes par description
+// function filterByDescription(recipesData, searchText) {
+//   const filteredRecipes = recipesData.filter((recipe) => {
+//     const description = normalizeString(recipe.description.toLowerCase());
+//     return description.includes(searchText);
+//   });
 
-  updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
-  updateApplianceDropdown(filteredRecipes);
-  updateUstensilsDropdown(filteredRecipes);
-  return filteredRecipes; // Renvoyer les recettes filtrées
-}
+//   updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
+//   updateApplianceDropdown(filteredRecipes);
+//   updateUstensilsDropdown(filteredRecipes);
+//   return filteredRecipes; // Renvoyer les recettes filtrées
+// }
 
-// Fonction pour filtrer les recettes par appareil
-function filterByAppliance(recipesData, searchText) {
-  const filteredRecipes = recipesData.filter((recipe) => {
-    const appliance = normalizeString(recipe.appliance.toLowerCase());
-    return appliance.includes(searchText);
-  });
+// // Fonction pour filtrer les recettes par appareil
+// function filterByAppliance(recipesData, searchText) {
+//   const filteredRecipes = recipesData.filter((recipe) => {
+//     const appliance = normalizeString(recipe.appliance.toLowerCase());
+//     return appliance.includes(searchText);
+//   });
 
-  updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
-  updateApplianceDropdown(filteredRecipes);
-  updateUstensilsDropdown(filteredRecipes);
-  return filteredRecipes; // Renvoyer les recettes filtrées
-}
+//   updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
+//   updateApplianceDropdown(filteredRecipes);
+//   updateUstensilsDropdown(filteredRecipes);
+//   return filteredRecipes; // Renvoyer les recettes filtrées
+// }
 
-// Fonction pour filtrer les recettes par ustensiles
-function filterByUstensils(recipesData, searchText) {
-  const filteredRecipes = recipesData.filter((recipe) => {
-    return recipe.ustensils.some((ustensil) => {
-      const ustensilName = normalizeString(ustensil.toLowerCase());
-      return ustensilName.includes(searchText);
-    });
-  });
+// // Fonction pour filtrer les recettes par ustensiles
+// function filterByUstensils(recipesData, searchText) {
+//   const filteredRecipes = recipesData.filter((recipe) => {
+//     return recipe.ustensils.some((ustensil) => {
+//       const ustensilName = normalizeString(ustensil.toLowerCase());
+//       return ustensilName.includes(searchText);
+//     });
+//   });
 
-  updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
-  updateApplianceDropdown(filteredRecipes);
-  updateUstensilsDropdown(filteredRecipes);
-  return filteredRecipes; // Renvoyer les recettes filtrées
-}
+//   updateIngredientsDropdown(filteredRecipes); // Mettre à jour le menu déroulant des ingrédients
+//   updateApplianceDropdown(filteredRecipes);
+//   updateUstensilsDropdown(filteredRecipes);
+//   return filteredRecipes; // Renvoyer les recettes filtrées
+// }
 
 // Fonction pour filtrer les recettes en fonction des badges sélectionnés
 function filterBySelectedItems(recipesData, selectedItems) {
@@ -143,14 +143,8 @@ function filterBySelectedItems(recipesData, selectedItems) {
 
 function filterRecipes() {
   const searchText = normalizeString(searchInput.value.toLowerCase());
-  const selectedBadges = selectedItemsContainer.querySelectorAll(".tag");
-  const selectedItems = Array.from(selectedBadges).map(
-    (badge) => badge.textContent
-  );
-
   const recipesData = getRecipe();
   let filteredRecipes = recipesData;
-
   if (searchText.length >= 3) {
     filteredRecipes = recipesData.filter((recipe) => {
       const recipeName = normalizeString(recipe.name.toLowerCase());
@@ -170,7 +164,6 @@ function filterRecipes() {
         const ustensilName = normalizeString(ustensil.toLowerCase());
         return ustensilName.includes(searchText);
       });
-
       return (
         recipeName.includes(searchText) ||
         ingredientMatch ||
@@ -180,15 +173,12 @@ function filterRecipes() {
       );
     });
   }
-
   if (selectedItemsContainer.children.length > 0) {
     const selectedItems = Array.from(
       selectedItemsContainer.querySelectorAll(".tag")
     ).map((badge) => normalizeString(badge.textContent.toLowerCase()));
-
     filteredRecipes = filterBySelectedItems(filteredRecipes, selectedItems);
   }
-
   displayFilteredRecipes(filteredRecipes);
   updateIngredientsDropdown(filteredRecipes);
   updateApplianceDropdown(filteredRecipes);
@@ -353,12 +343,6 @@ function generateUstensilsOptions() {
     ${ustensilsOptions
       .map((e) => `<li class="dropdown-item">${e}</li>`)
       .join("")}`;
-  // ustensilsOptions.forEach((ustensil) => {
-  //   const li = document.createElement('li');
-  //   li.classList.add('dropdown-item');
-  //   li.innerHTML = `${ustensil}`;
-  //   ustensilsDropdown.appendChild(li);
-  // });
 }
 
 generateUstensilsOptions();
@@ -439,6 +423,11 @@ function createBadge(item) {
 
 // Supprime un élément sélectionné (tag)
 function removeSelectedItem(badge) {
+  const dropdowns = document.querySelectorAll(".dropdown-item");
+  dropdowns.forEach((item) => {
+      item.classList.remove("selected");
+    })
+  
   badge.remove(); // Supprime le badge d'élément sélectionné
   filterRecipes(); // Obtient les recettes filtrées à partir de la fonction filterRecipes()
 }
@@ -498,48 +487,48 @@ document.getElementById("ustensiles").addEventListener("input", function () {
 });
 
 // test performance
-// // Fonction pour mesurer le temps d'exécution de la fonction filterRecipes
-// function testFilterRecipesPerformance() {
-//   // Avant l'exécution de la fonction
-//   const startTime = performance.now();
+// Fonction pour mesurer le temps d'exécution de la fonction filterRecipes
+function testFilterRecipesPerformance() {
+  // Avant l'exécution de la fonction
+  const startTime = performance.now();
 
-//   // Exécution de la fonction filterRecipes
-//   filterRecipes();
+  // Exécution de la fonction filterRecipes
+  filterRecipes();
 
-//   // Après l'exécution de la fonction
-//   const endTime = performance.now();
+  // Après l'exécution de la fonction
+  const endTime = performance.now();
 
-//   // Calculer la durée d'exécution en millisecondes
-//   const duration = endTime - startTime;
+  // Calculer la durée d'exécution en millisecondes
+  const duration = endTime - startTime;
 
-//   console.log("Durée d'exécution :", duration, "ms");
-// }
+  console.log("Durée d'exécution :", duration, "ms");
+}
 
-// // // Appeler la fonction testFilterRecipesPerformance pour mesurer les performances de filterRecipes
+// // Appeler la fonction testFilterRecipesPerformance pour mesurer les performances de filterRecipes
 
-// // Fonction pour tester les performances de filterRecipes avec différentes valeurs de recherche simulées
-// function testFilterRecipesPerformanceWithInputValues() {
-//   const inputValues = ['tomate', 'tarte', 'limonade', 'soupe', 'salade'];
+// Fonction pour tester les performances de filterRecipes avec différentes valeurs de recherche simulées
+function testFilterRecipesPerformanceWithInputValues() {
+  const inputValues = ['tomate', 'tarte', 'limonade', 'soupe', 'salade'];
 
-//   inputValues.forEach((inputValue) => {
-//     console.log(`Recherche pour "${inputValue}":`);
-//     // Simuler l'entrée dans l'input avec la valeur de recherche actuelle
-//     simulateInput(inputValue, document.getElementById('search-bar'));
+  inputValues.forEach((inputValue) => {
+    console.log(`Recherche pour "${inputValue}":`);
+    // Simuler l'entrée dans l'input avec la valeur de recherche actuelle
+    simulateInput(inputValue, document.getElementById('search-bar'));
 
-//     // Mesurer les performances de filterRecipes pour la valeur de recherche actuelle
-//     testFilterRecipesPerformance();
+    // Mesurer les performances de filterRecipes pour la valeur de recherche actuelle
+    testFilterRecipesPerformance();
 
-//     console.log('------------------------');
-//   });
-// }
+    console.log('------------------------');
+  });
+}
 
-// // testFilterRecipesPerformance();
-// function simulateInput(inputValue) {
-//   const searchInput = document.getElementById('search-bar');
-//   searchInput.value = inputValue;
-//   const event = new Event('input', { bubbles: true });
-//   searchInput.dispatchEvent(event);
-// }
+// testFilterRecipesPerformance();
+function simulateInput(inputValue) {
+  const searchInput = document.getElementById('search-bar');
+  searchInput.value = inputValue;
+  const event = new Event('input', { bubbles: true });
+  searchInput.dispatchEvent(event);
+}
 
-// // Appeler la fonction testFilterRecipesPerformanceWithInputValues pour tester les performances avec différentes valeurs de recherche simulées
-// testFilterRecipesPerformanceWithInputValues();
+// Appeler la fonction testFilterRecipesPerformanceWithInputValues pour tester les performances avec différentes valeurs de recherche simulées
+testFilterRecipesPerformanceWithInputValues();
