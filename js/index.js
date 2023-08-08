@@ -1,7 +1,7 @@
 // Récupère les données des recettes
 function getRecipe() {
   try {
-    const data = recipes; // Récupère les données des recettes (assumant que la variable 'recipes' est définie ailleurs)
+    const data = recipes; // Récupère les données des recettes 
     return data; // Retourne les données des recettes
     // console.log(data);
   } catch (error) {
@@ -48,118 +48,118 @@ function normalizeString(text) {
   return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-function filterByRecipeName(recipesData, searchText) {
-  const filteredRecipes = [];
-  const normalizedSearchText = normalizeString(searchText.toLowerCase());
+// function filterByRecipeName(recipesData, searchText) {
+//   const filteredRecipes = [];
+//   const normalizedSearchText = normalizeString(searchText.toLowerCase());
 
-  let filteredIndex = 0;
-  for (const recipe of recipesData) {
-    const normalizedRecipeName = normalizeString(recipe.name.toLowerCase());
-    if (normalizedRecipeName.indexOf(normalizedSearchText) !== -1) {
-      filteredRecipes[filteredIndex] = recipe;
-      filteredIndex++;
-    }
-  }
+//   let filteredIndex = 0;
+//   for (const recipe of recipesData) {
+//     const normalizedRecipeName = normalizeString(recipe.name.toLowerCase());
+//     if (normalizedRecipeName.indexOf(normalizedSearchText) !== -1) {
+//       filteredRecipes[filteredIndex] = recipe;
+//       filteredIndex++;
+//     }
+//   }
 
-  return filteredRecipes;
-}
-
-
-
-
-function filterByIngredients(recipesData, searchText) {
-  const filteredRecipes = [];
-  const normalizedSearchText = normalizeString(searchText.toLowerCase());
-
-  let filteredIndex = 0;
-  for (const recipe of recipesData) {
-    for (const ingredient of recipe.ingredients) {
-      const ingredientName = normalizeString(ingredient.ingredient.toLowerCase());
-      if (ingredientName.indexOf(normalizedSearchText) !== -1) {
-        filteredRecipes[filteredIndex] = recipe;
-        filteredIndex++;
-        break;
-      }
-    }
-  }
-
-  updateIngredientsDropdown(filteredRecipes);
-  updateApplianceDropdown(filteredRecipes);
-  updateUstensilsDropdown(filteredRecipes);
-  return filteredRecipes;
-}
-
-
-function filterByDescription(recipesData, searchText) {
-  const filteredRecipes = [];
-  const normalizedSearchText = normalizeString(searchText.toLowerCase());
-
-  let filteredIndex = 0;
-  for (const recipe of recipesData) {
-    const description = normalizeString(recipe.description.toLowerCase());
-    if (description.indexOf(normalizedSearchText) !== -1) {
-      filteredRecipes[filteredIndex] = recipe;
-      filteredIndex++;
-    }
-  }
-
-  updateIngredientsDropdown(filteredRecipes);
-  updateApplianceDropdown(filteredRecipes);
-  updateUstensilsDropdown(filteredRecipes);
-
-  return filteredRecipes;
-}
+//   return filteredRecipes;
+// }
 
 
 
-function filterByAppliance(recipesData, searchText) {
-  const filteredRecipes = [];
-  const normalizedSearchText = normalizeString(searchText.toLowerCase());
 
-  let filteredIndex = 0;
-  for (const recipe of recipesData) {
-    const appliance = normalizeString(recipe.appliance.toLowerCase());
-    if (appliance.indexOf(normalizedSearchText) !== -1) {
-      filteredRecipes[filteredIndex] = recipe;
-      filteredIndex++;
-    }
-  }
+// function filterByIngredients(recipesData, searchText) {
+//   const filteredRecipes = [];
+//   const normalizedSearchText = normalizeString(searchText.toLowerCase());
 
-  updateIngredientsDropdown(filteredRecipes);
-  updateApplianceDropdown(filteredRecipes);
-  updateUstensilsDropdown(filteredRecipes);
+//   let filteredIndex = 0;
+//   for (const recipe of recipesData) {
+//     for (const ingredient of recipe.ingredients) {
+//       const ingredientName = normalizeString(ingredient.ingredient.toLowerCase());
+//       if (ingredientName.indexOf(normalizedSearchText) !== -1) {
+//         filteredRecipes[filteredIndex] = recipe;
+//         filteredIndex++;
+//         break;
+//       }
+//     }
+//   }
 
-  return filteredRecipes;
-}
+//   updateIngredientsDropdown(filteredRecipes);
+//   updateApplianceDropdown(filteredRecipes);
+//   updateUstensilsDropdown(filteredRecipes);
+//   return filteredRecipes;
+// }
+
+
+// function filterByDescription(recipesData, searchText) {
+//   const filteredRecipes = [];
+//   const normalizedSearchText = normalizeString(searchText.toLowerCase());
+
+//   let filteredIndex = 0;
+//   for (const recipe of recipesData) {
+//     const description = normalizeString(recipe.description.toLowerCase());
+//     if (description.indexOf(normalizedSearchText) !== -1) {
+//       filteredRecipes[filteredIndex] = recipe;
+//       filteredIndex++;
+//     }
+//   }
+
+//   updateIngredientsDropdown(filteredRecipes);
+//   updateApplianceDropdown(filteredRecipes);
+//   updateUstensilsDropdown(filteredRecipes);
+
+//   return filteredRecipes;
+// }
 
 
 
-function filterByUstensils(recipesData, searchText) {
-  const filteredRecipes = [];
-  const normalizedSearchText = normalizeString(searchText.toLowerCase());
+// function filterByAppliance(recipesData, searchText) {
+//   const filteredRecipes = [];
+//   const normalizedSearchText = normalizeString(searchText.toLowerCase());
 
-  let filteredIndex = 0;
-  for (const recipe of recipesData) {
-    let ustensilFound = false;
-    for (const ustensil of recipe.ustensils) {
-      const ustensilName = normalizeString(ustensil.toLowerCase());
-      if (ustensilName.indexOf(normalizedSearchText) !== -1) {
-        ustensilFound = true;
-        break;
-      }
-    }
-    if (ustensilFound) {
-      filteredRecipes[filteredIndex] = recipe;
-      filteredIndex++;
-    }
-  }
+//   let filteredIndex = 0;
+//   for (const recipe of recipesData) {
+//     const appliance = normalizeString(recipe.appliance.toLowerCase());
+//     if (appliance.indexOf(normalizedSearchText) !== -1) {
+//       filteredRecipes[filteredIndex] = recipe;
+//       filteredIndex++;
+//     }
+//   }
 
-  updateIngredientsDropdown(filteredRecipes);
-  updateApplianceDropdown(filteredRecipes);
-  updateUstensilsDropdown(filteredRecipes);
+//   updateIngredientsDropdown(filteredRecipes);
+//   updateApplianceDropdown(filteredRecipes);
+//   updateUstensilsDropdown(filteredRecipes);
 
-  return filteredRecipes;
-}
+//   return filteredRecipes;
+// }
+
+
+
+// function filterByUstensils(recipesData, searchText) {
+//   const filteredRecipes = [];
+//   const normalizedSearchText = normalizeString(searchText.toLowerCase());
+
+//   let filteredIndex = 0;
+//   for (const recipe of recipesData) {
+//     let ustensilFound = false;
+//     for (const ustensil of recipe.ustensils) {
+//       const ustensilName = normalizeString(ustensil.toLowerCase());
+//       if (ustensilName.indexOf(normalizedSearchText) !== -1) {
+//         ustensilFound = true;
+//         break;
+//       }
+//     }
+//     if (ustensilFound) {
+//       filteredRecipes[filteredIndex] = recipe;
+//       filteredIndex++;
+//     }
+//   }
+
+//   updateIngredientsDropdown(filteredRecipes);
+//   updateApplianceDropdown(filteredRecipes);
+//   updateUstensilsDropdown(filteredRecipes);
+
+//   return filteredRecipes;
+// }
 
 
 
@@ -754,7 +754,7 @@ function simulateInput(inputValue) {
 }
 
 // Appeler la fonction testFilterRecipesPerformanceWithInputValues pour tester les performances avec différentes valeurs de recherche simulées
-testFilterRecipesPerformanceWithInputValues();
+// testFilterRecipesPerformanceWithInputValues();
 
 
 
