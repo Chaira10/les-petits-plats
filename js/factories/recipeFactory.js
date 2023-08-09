@@ -2,7 +2,7 @@ function recipeFactory(data) {
     const { id, image , name, servings, ingredients, time, description, appliance, ustensils} = data;
     const picture = `assets/images/recettes/${image}`;
     function getRecipeCardDom() {
-        const card = document.createElement('div');
+        const card = document.createElement('article');
         card.classList.add('card');
         const imgContainer = document.createElement('div');
         imgContainer.classList.add('img-card');

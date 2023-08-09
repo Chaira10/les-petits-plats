@@ -115,14 +115,10 @@ function filterBySelectedItems(recipesData, selectedItems) {
     return selectedItems.every((item) => {
       const normalizedItem = normalizeString(item.toLowerCase());
       return (
-        normalizeString(recipe.name.toLowerCase()).includes(normalizedItem) ||
         recipe.ingredients.some((ingredient) =>
           normalizeString(ingredient.ingredient.toLowerCase()).includes(
             normalizedItem
           )
-        ) ||
-        normalizeString(recipe.description.toLowerCase()).includes(
-          normalizedItem
         ) ||
         normalizeString(recipe.appliance.toLowerCase()).includes(
           normalizedItem
@@ -218,12 +214,9 @@ function displayFilteredRecipes(filteredRecipes) {
 }
 
 const ingredientsDropdown = document.getElementById("ingredientList");
-
 function generateIngredientsOptions() {
   const recipesData = getRecipe();
-
   const ingredientsSet = new Set();
-
   recipesData.forEach((recipe) => {
     recipe.ingredients.forEach((ingredient) => {
       const normalizedIngredient = normalizeString(
@@ -232,22 +225,18 @@ function generateIngredientsOptions() {
       ingredientsSet.add(normalizedIngredient);
     });
   });
-
   const ingredientsOptions = Array.from(ingredientsSet).sort();
-
   const ingredientsDropdown = document.getElementById("ingredientList");
   ingredientsDropdown.innerHTML = `
       ${ingredientsOptions
         .map((e) => `<li class="dropdown-item">${e}</li>`)
         .join("")}
-    `; // Efface le contenu précédent du dropdown
-
+    `; 
   const dropdowns = document.querySelectorAll(".dropdown-item");
   dropdowns.forEach((item) => {
     item.addEventListener("click", handleSelection);
   });
 }
-
 generateIngredientsOptions();
 
 function updateIngredientsDropdown(filteredRecipes) {
@@ -260,11 +249,9 @@ function updateIngredientsDropdown(filteredRecipes) {
       ingredientsSet.add(ingredientName);
     });
   });
-  // console.log("Ingredients Set:", ingredientsSet);
   const ingredientsList = ingredientsDropdown.querySelectorAll("li");
   ingredientsList.forEach((item) => {
     const ingredient = item.textContent.toLowerCase();
-    // console.log("Current Ingredient:", ingredient);
     if (ingredientsSet.has(ingredient)) {
       item.style.display = "";
     } else {
@@ -397,26 +384,21 @@ function createBadge(item) {
 
   // Vérifier si l'événement de clic a déjà été ajouté à l'icône de la croix
   const closeIcon = badge.querySelector(".fa-xmark");
-
   // Ajouter un gestionnaire d'événements de clic à l'icône de la croix
   closeIcon.addEventListener("click", () => {
     removeSelectedItem(badge);
   });
-
   // Ajouter la classe "selected" à l'élément de liste
   const dropdowns = document.querySelectorAll(".dropdown-item");
   dropdowns.forEach((item) => {
     if (item.textContent.toLowerCase() === trimmedItem.toLowerCase()) {
       item.classList.add("selected");
-
       // Supprimer l'écouteur d'événements de clic pour cet élément
       item.removeEventListener("click", handleSelection);
-
       // Masquer l'élément en définissant sa propriété display à "none"
       item.style.display = "none";
     }
   });
-
   selectedItemsContainer.appendChild(badge);
   filterRecipes();
 }
@@ -427,14 +409,12 @@ function removeSelectedItem(badge) {
   dropdowns.forEach((item) => {
       item.classList.remove("selected");
     })
-  
   badge.remove(); // Supprime le badge d'élément sélectionné
   filterRecipes(); // Obtient les recettes filtrées à partir de la fonction filterRecipes()
 }
 
 function handleSelection(event) {
   const selectedItem = event.target.textContent;
-
   // Vérifier si l'élément de la liste déroulante a déjà la classe "selected"
   if (!event.target.classList.contains("selected")) {
     // console.log(selectedItem);
@@ -446,7 +426,6 @@ function handleSelection(event) {
     li.classList.add("selected"); // Ajouter la classe "selected" à l'élément
     li.style.display = "none"; // Cacher l'élément en définissant sa propriété display à "none"
   }
-
   filterRecipes();
 }
 
@@ -500,11 +479,8 @@ function testFilterRecipesPerformance() {
 
   // Calculer la durée d'exécution en millisecondes
   const duration = endTime - startTime;
-
   console.log("Durée d'exécution :", duration, "ms");
 }
-
-// // Appeler la fonction testFilterRecipesPerformance pour mesurer les performances de filterRecipes
 
 // Fonction pour tester les performances de filterRecipes avec différentes valeurs de recherche simulées
 function testFilterRecipesPerformanceWithInputValues() {
@@ -521,7 +497,6 @@ function testFilterRecipesPerformanceWithInputValues() {
     console.log('------------------------');
   });
 }
-
 // testFilterRecipesPerformance();
 function simulateInput(inputValue) {
   const searchInput = document.getElementById('search-bar');
