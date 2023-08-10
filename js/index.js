@@ -174,18 +174,18 @@ function filterBySelectedItems(recipesData, selectedItems) {
 
   for (let i = 0; i < recipesData.length; i++) {
     const recipe = recipesData[i];
-    const { name, ingredients, description, appliance, ustensils } = recipe;
-    const normalizedName = normalizeString(name.toLowerCase());
-    const normalizedDescription = normalizeString(description.toLowerCase());
+    const {  ingredients,  appliance, ustensils } = recipe;
+    // const normalizedName = normalizeString(name.toLowerCase());
+    // const normalizedDescription = normalizeString(description.toLowerCase());
     const normalizedAppliance = normalizeString(appliance.toLowerCase());
 
     let found = false;
     for (let j = 0; j < normalizedSelectedItems.length; j++) {
       const item = normalizedSelectedItems[j];
       if (
-        normalizedName.indexOf(item) !== -1 ||
+        // normalizedName.indexOf(item) !== -1 ||
         ingredientsMatch(ingredients, item) ||
-        normalizedDescription.indexOf(item) !== -1 ||
+        // normalizedDescription.indexOf(item) !== -1 ||
         normalizedAppliance.indexOf(item) !== -1 ||
         ustensilsMatch(ustensils, item)
       ) {
