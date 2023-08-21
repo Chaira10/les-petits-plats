@@ -513,6 +513,8 @@ document.getElementById("ustensiles").addEventListener("input", function () {
   searchList("ustensiles", "ustensilsDropdown");
 });
 
+
+
 const searchIcon = document.querySelector('.search-icone');
 
 searchInput.addEventListener('input', () => {
