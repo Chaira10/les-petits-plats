@@ -513,6 +513,17 @@ document.getElementById("ustensiles").addEventListener("input", function () {
   searchList("ustensiles", "ustensilsDropdown");
 });
 
+const searchIcon = document.querySelector('.search-icone');
+
+searchInput.addEventListener('input', () => {
+  if (searchInput.value.trim() === '') {
+    searchIcon.style.visibility = 'visible';
+  } else {
+    searchIcon.style.visibility = 'hidden';
+  }
+});
+
+
 // test performance
 // Fonction pour mesurer le temps d'exécution de la fonction filterRecipes
 function testFilterRecipesPerformance() {
