@@ -403,7 +403,6 @@ function createBadge(item) {
   badge.classList.add("badg-primary", "me-2", "tag");
   badge.textContent = trimmedItem;
   badge.innerHTML = `${trimmedItem}<i class="fa-solid fa-xmark ms-3"></i>`;
-
   // Obtenir l'icône de la croix à l'intérieur du badge
   const closeIcon = badge.querySelector(".fa-xmark");
   // Ajouter un gestionnaire d'événements de clic à l'icône de la croix
@@ -531,13 +530,10 @@ searchInput.addEventListener('input', () => {
 function testFilterRecipesPerformance() {
   // Avant l'exécution de la fonction
   const startTime = performance.now();
-
   // Exécution de la fonction filterRecipes
   filterRecipes();
-
   // Après l'exécution de la fonction
   const endTime = performance.now();
-
   // Calculer la durée d'exécution en millisecondes
   const duration = endTime - startTime;
   console.log("Durée d'exécution :", duration, "ms");
@@ -546,15 +542,12 @@ function testFilterRecipesPerformance() {
 // Fonction pour tester les performances de filterRecipes avec différentes valeurs de recherche simulées
 function testFilterRecipesPerformanceWithInputValues() {
   const inputValues = ["tomate", "tarte", "limonade", "soupe", "salade"];
-
   inputValues.forEach((inputValue) => {
     console.log(`Recherche pour "${inputValue}":`);
     // Simuler l'entrée dans l'input avec la valeur de recherche actuelle
     simulateInput(inputValue, document.getElementById("search-bar"));
-
     // Mesurer les performances de filterRecipes pour la valeur de recherche actuelle
     testFilterRecipesPerformance();
-
     console.log("------------------------");
   });
 }
@@ -570,6 +563,5 @@ function simulateInput(inputValue) {
   // Déclencher l'événement "input" sur le champ de recherche
   searchInput.dispatchEvent(event);
 }
-
 // Appeler la fonction testFilterRecipesPerformanceWithInputValues pour tester les performances avec différentes valeurs de recherche simulées
 // testFilterRecipesPerformanceWithInputValues();

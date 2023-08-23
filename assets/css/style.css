@@ -229,3 +229,8 @@ h6 {
 .search-icone:hover i {
     color: black;
 }
+
+.dropdown-item:hover {
+    background-color: #ffd15b;
+
+}
